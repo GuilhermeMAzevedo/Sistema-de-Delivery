@@ -1,4 +1,4 @@
-package main.java.com.delivery.model;
+package com.delivery.model;
 
 public class Cliente extends Usuario{
     private String email;

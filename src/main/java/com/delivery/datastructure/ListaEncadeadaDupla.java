@@ -1,4 +1,4 @@
-package main.java.com.delivery.datastructure;
+package com.delivery.datastructure;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

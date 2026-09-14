@@ -1,4 +1,4 @@
-package main.java.com.delivery.enums;
+package com.delivery.enums;
 
 public enum StatusPagamento {
     PENDENTE,
