@@ -1,16 +1,16 @@
 package com.delivery.model;
 
 public class Produto {
-    private String id;
+    private final String id;
     private String nome;
     private double preco;
     private boolean disponivel;
 
-    public Produto(String id, String nome, double preco, boolean disponivel){
+    public Produto(String id, String nome, double preco){
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.disponivel = disponivel;
+        this.disponivel = true;
     }
 
     public String getId() {
@@ -29,27 +29,18 @@ public class Produto {
         return disponivel;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
     public void adicionarAoCardapio(){
-
+        this.disponivel = true;
     }
 
     public void removerDoCardapio(){
+        this.disponivel = false;
+    }
 
+    public void alterarPreco(double novoPreco){
+        if (novoPreco < 0){
+            throw new IllegalArgumentException("O preço não pode ser negativo.");
+        }
+        this.preco = novoPreco;
     }
 }

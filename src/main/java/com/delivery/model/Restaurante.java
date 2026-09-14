@@ -3,7 +3,7 @@ package com.delivery.model;
 import com.delivery.datastructure.ListaEncadeadaDupla;
 
 public class Restaurante {
-    private String id;
+    private final String id;
     private String nome;
     private String cnpj;
     private ListaEncadeadaDupla<Produto> cardapio;
