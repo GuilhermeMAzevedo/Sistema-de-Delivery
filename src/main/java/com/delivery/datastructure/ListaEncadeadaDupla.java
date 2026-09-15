@@ -223,7 +223,7 @@ public class ListaEncadeadaDupla<T> implements Iterable<T>{
             No<T> atual = inicio;
             @Override
             public boolean hasNext() {
-                return atual.proximo != null;
+                return atual != null;
             }
 
             @Override

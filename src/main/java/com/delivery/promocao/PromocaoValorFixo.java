@@ -11,6 +11,7 @@ public class PromocaoValorFixo extends Promocao{
         if (valorDesconto <= 0){
             throw new IllegalArgumentException("O valor do desconto deve ser positivo.");
         }
+        this.valorDesconto = valorDesconto;
     }
 
     @Override
