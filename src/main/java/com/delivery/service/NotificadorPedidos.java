@@ -3,10 +3,10 @@ package com.delivery.service;
 import com.delivery.model.Pedido;
 import com.delivery.notificacao.NotificacaoService;
 
-public class NotificadorPedido {
+public class NotificadorPedidos {
     private NotificacaoService notificacaoService;
 
-    public NotificadorPedido(NotificacaoService notificacaoService){
+    public NotificadorPedidos(NotificacaoService notificacaoService){
         this.notificacaoService = notificacaoService;
     }
 

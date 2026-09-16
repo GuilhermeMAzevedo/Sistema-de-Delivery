@@ -1,18 +1,19 @@
 package com.delivery.model;
 
-import com.delivery.datastructure.ListaEncadeadaDupla;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Restaurante {
     private final String id;
     private String nome;
     private String cnpj;
-    private ListaEncadeadaDupla<Produto> cardapio;
+    private List<Produto> cardapio;
 
     public Restaurante(String id, String nome, String cnpj){
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
-        this.cardapio = new ListaEncadeadaDupla<>();
+        this.cardapio = new ArrayList<>();
     }
 
     public String getId() {
@@ -27,15 +28,15 @@ public class Restaurante {
         return cnpj;
     }
 
+    public List<Produto> getCardapio(){
+        return List.copyOf(cardapio);
+    }
+
     public void adicionarProduto(Produto produto){
-        cardapio.inserirFinal(produto);
+        cardapio.add(produto);
     }
 
     public void removerProduto(Produto produto){
-        cardapio.remover(cardapio.buscar(produto));
-    }
-
-    public ListaEncadeadaDupla<Produto> getCardapio(){
-        return cardapio;
+        cardapio.remove(produto);
     }
 }

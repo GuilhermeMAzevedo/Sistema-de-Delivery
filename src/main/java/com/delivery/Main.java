@@ -7,13 +7,13 @@ import com.delivery.pagamento.Pagamento;
 import com.delivery.pagamento.PagamentoPix;
 import com.delivery.promocao.Promocao;
 import com.delivery.promocao.PromocaoPercentual;
-import com.delivery.repository.ClienteRepository;
+import com.delivery.repository.ClientesRepository;
 import com.delivery.repository.PedidosRepository;
-import com.delivery.repository.RestauranteRepository;
+import com.delivery.repository.RestaurantesRepository;
 import com.delivery.service.CheckoutService;
 import com.delivery.service.GerenciadorClientes;
 import com.delivery.service.GerenciadorRestaurantes;
-import com.delivery.service.NotificadorPedido;
+import com.delivery.service.NotificadorPedidos;
 
 import java.time.LocalDateTime;
 
@@ -23,15 +23,15 @@ public class Main {
 
         // 1. Infraestrutura: repositórios e services
         PedidosRepository pedidosRepository = new PedidosRepository();
-        ClienteRepository clienteRepository = new ClienteRepository();
-        RestauranteRepository restauranteRepository = new RestauranteRepository();
+        ClientesRepository clientesRepository = new ClientesRepository();
+        RestaurantesRepository restaurantesRepository = new RestaurantesRepository();
 
         CheckoutService checkoutService = new CheckoutService(pedidosRepository);
-        GerenciadorClientes gerenciadorClientes = new GerenciadorClientes(clienteRepository);
-        GerenciadorRestaurantes gerenciadorRestaurantes = new GerenciadorRestaurantes(restauranteRepository);
+        GerenciadorClientes gerenciadorClientes = new GerenciadorClientes(clientesRepository);
+        GerenciadorRestaurantes gerenciadorRestaurantes = new GerenciadorRestaurantes(restaurantesRepository);
 
         NotificacaoService notificacaoService = new NotificacaoEmail();
-        NotificadorPedido notificadorPedido = new NotificadorPedido(notificacaoService);
+        NotificadorPedidos notificadorPedidos = new NotificadorPedidos(notificacaoService);
 
         // 2. Cadastro de restaurante e produtos (fluxo administrativo)
         Restaurante restaurante = new Restaurante("rest-1", "Pizzaria Bella", "12.345.678/0001-99");
@@ -43,8 +43,8 @@ public class Main {
 
         // 3. Cadastro do cliente (auto-cadastro, fora do fluxo do admin)
         Cliente cliente = new Cliente("cli-1", "Guilherme", "guilherme@email.com", "85999999999");
-        clienteRepository.salvar(cliente);
-        System.out.println("Clientes cadastrados (visão do admin): " + gerenciadorClientes.getClienteRepository().getClientes().getQuantidadeDados());
+        clientesRepository.salvar(cliente);
+        System.out.println("Clientes cadastrados (visão do admin): " + gerenciadorClientes.getClienteRepository().listarTodos().getQuantidadeDados());
 
         // 4. Montagem do carrinho
         Carrinho carrinho = new Carrinho();
@@ -70,7 +70,7 @@ public class Main {
 
         if (pagamentoAprovado) {
             pedido.confirmar();
-            notificadorPedido.notificarStatus(pedido);
+            notificadorPedidos.notificarStatus(pedido);
         }
 
         // 8. Entrega
@@ -85,14 +85,14 @@ public class Main {
         entrega.getRastreamento().atualizarPosicao(new PosicaoGPS(-3.7350, -38.5300));
 
         entrega.finalizar();
-        notificadorPedido.notificarStatus(pedido);
+        notificadorPedidos.notificarStatus(pedido);
 
         System.out.println("Entrega " + entrega.getId()
                 + " | Status: " + entrega.getStatus()
-                + " | Posições registradas: " + entrega.getRastreamento().getHistorico().getQuantidadeDados());
+                + " | Posições registradas: " + entrega.getRastreamento().getHistorico().toArray().length);
 
         // 9. Consulta de pedidos do cliente
         System.out.println("Pedidos do cliente " + cliente.getNome() + ": "
-                + pedidosRepository.consultarPedidos(cliente).getQuantidadeDados());
+                + pedidosRepository.consultarPedidos(cliente).toArray().length);
     }
 }

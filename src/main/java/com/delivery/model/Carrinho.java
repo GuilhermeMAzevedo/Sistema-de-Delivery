@@ -1,11 +1,17 @@
 package com.delivery.model;
 
-import com.delivery.datastructure.ListaEncadeadaDupla;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Carrinho {
-    private ListaEncadeadaDupla<ItemCarrinho> itens;
+    private List<ItemCarrinho> itens;
+
     public Carrinho(){
-        this.itens = new ListaEncadeadaDupla<>();
+        this.itens = new ArrayList<>();
+    }
+
+    public List<ItemCarrinho> getItens(){
+        return List.copyOf(itens);
     }
 
     public void adicionarAoCarrinho(Produto produto, int quantidade){
@@ -15,13 +21,13 @@ public class Carrinho {
                 return;
             }
         }
-        itens.inserirFinal(new ItemCarrinho(produto,quantidade));
+        itens.add(new ItemCarrinho(produto,quantidade));
     }
 
     public void removerDoCarrinho(Produto produto){
         for (ItemCarrinho item : itens){
             if (item.getProduto().equals(produto)){
-                itens.remover(itens.buscar(item));
+                itens.remove(item);
             }
         }
     }
@@ -32,9 +38,5 @@ public class Carrinho {
             total += item.subtotal();
         }
         return total;
-    }
-
-    public ListaEncadeadaDupla<ItemCarrinho> getItens(){
-        return itens;
     }
 }

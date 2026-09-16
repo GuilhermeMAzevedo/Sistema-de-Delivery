@@ -1,29 +1,30 @@
 package com.delivery.service;
 
-import com.delivery.datastructure.ListaEncadeadaDupla;
 import com.delivery.model.Restaurante;
-import com.delivery.repository.RestauranteRepository;
+import com.delivery.repository.RestaurantesRepository;
+
+import java.util.List;
 
 public class GerenciadorRestaurantes {
-    private RestauranteRepository restauranteRepository;
+    private RestaurantesRepository restaurantesRepository;
 
-    public GerenciadorRestaurantes(RestauranteRepository restauranteRepository){
-        this.restauranteRepository = restauranteRepository;
+    public GerenciadorRestaurantes(RestaurantesRepository restaurantesRepository){
+        this.restaurantesRepository = restaurantesRepository;
     }
 
-    public RestauranteRepository getRestauranteRepository(){
-         return restauranteRepository;
+    public List<Restaurante> listarRestaurantes(){
+        return restaurantesRepository.listarTodos();
     }
 
     public Restaurante buscarRestaurantePorId(String id){
-        return restauranteRepository.buscarPorId(id);
+        return restaurantesRepository.buscarPorId(id);
     }
 
     public void cadastrarRestaurante(Restaurante restaurante){
-        restauranteRepository.salvar(restaurante);
+        restaurantesRepository.salvar(restaurante);
     }
 
     public void excluirRestaurante(String id){
-        restauranteRepository.excluirPorId(id);
+        restaurantesRepository.excluirPorId(id);
     }
 }

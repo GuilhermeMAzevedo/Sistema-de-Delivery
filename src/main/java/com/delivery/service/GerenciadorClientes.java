@@ -1,25 +1,26 @@
 package com.delivery.service;
 
-import com.delivery.datastructure.ListaEncadeadaDupla;
 import com.delivery.model.Cliente;
-import com.delivery.repository.ClienteRepository;
+import com.delivery.repository.ClientesRepository;
+
+import java.util.List;
 
 public class GerenciadorClientes {
-    private ClienteRepository clienteRepository;
+    private ClientesRepository clientesRepository;
 
-    public GerenciadorClientes(ClienteRepository clienteRepository){
-        this.clienteRepository = clienteRepository;
+    public GerenciadorClientes(ClientesRepository clientesRepository){
+        this.clientesRepository = clientesRepository;
     }
 
-    public ClienteRepository getClienteRepository() {
-        return clienteRepository;
+    public List<Cliente> listarClientes(){
+        return clientesRepository.listarTodos();
     }
 
     public Cliente buscarClientePorId(String id){
-        return clienteRepository.buscarPorId(id);
+        return clientesRepository.buscarPorId(id);
     }
 
     public void excluirCliente(String id){
-        clienteRepository.excluirPorId(id);
+        clientesRepository.excluirPorId(id);
     }
 }

@@ -1,19 +1,20 @@
 package com.delivery.model;
 
-import com.delivery.datastructure.ListaEncadeadaDupla;
+import java.util.List;
+import java.util.ArrayList;
 
 public class RastreamentoPedido {
-    private ListaEncadeadaDupla<PosicaoGPS> historico;
+    private List<PosicaoGPS> historico;
 
     public RastreamentoPedido(){
-        this.historico = new ListaEncadeadaDupla<>();
+        this.historico = new ArrayList<>();
     }
 
     public void atualizarPosicao(PosicaoGPS posicao){
-        historico.inserirFinal(posicao);
+        historico.add(posicao);
     }
 
-    public ListaEncadeadaDupla<PosicaoGPS> getHistorico(){
-        return historico;
+    public List<PosicaoGPS> getHistorico(){
+        return List.copyOf(historico);
     }
 }

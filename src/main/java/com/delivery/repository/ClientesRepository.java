@@ -1,13 +1,14 @@
 package com.delivery.repository;
 
-import com.delivery.datastructure.ListaEncadeadaDupla;
 import com.delivery.model.Cliente;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ClienteRepository {
-    private ListaEncadeadaDupla<Cliente> clientes = new ListaEncadeadaDupla<>();
+public class ClientesRepository {
+    private List<Cliente> clientes = new ArrayList<>();
 
     public void salvar(Cliente cliente){
-        clientes.inserirFinal(cliente);
+        clientes.add(cliente);
     }
 
     public Cliente buscarPorId(String id){
@@ -19,11 +20,11 @@ public class ClienteRepository {
         return null;
     }
 
-    public ListaEncadeadaDupla<Cliente> getClientes(){
-        return clientes;
+    public List<Cliente> listarTodos(){
+        return List.copyOf(clientes);
     }
 
     public void excluirPorId(String id){
-        clientes.remover(clientes.buscar(buscarPorId(id)));
+        clientes.remove(buscarPorId(id));
     }
 }

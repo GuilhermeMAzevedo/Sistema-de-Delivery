@@ -29,12 +29,8 @@ public class Produto {
         return disponivel;
     }
 
-    public void adicionarAoCardapio(){
-        this.disponivel = true;
-    }
-
-    public void removerDoCardapio(){
-        this.disponivel = false;
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
     }
 
     public void alterarPreco(double novoPreco){

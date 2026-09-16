@@ -1,13 +1,14 @@
 package com.delivery.repository;
 
-import com.delivery.datastructure.ListaEncadeadaDupla;
 import com.delivery.model.Restaurante;
+import java.util.ArrayList;
+import java.util.List;
 
-public class RestauranteRepository {
-    private ListaEncadeadaDupla<Restaurante> restaurantes = new ListaEncadeadaDupla<>();
+public class RestaurantesRepository {
+    private List<Restaurante> restaurantes = new ArrayList<>();
 
     public void salvar(Restaurante restaurante){
-        restaurantes.inserirFinal(restaurante);
+        restaurantes.add(restaurante);
     }
 
     public Restaurante buscarPorId(String id){
@@ -19,11 +20,11 @@ public class RestauranteRepository {
         return null;
     }
 
-    public ListaEncadeadaDupla<Restaurante> getRestaurantes(){
-        return restaurantes;
+    public List<Restaurante> listarTodos(){
+        return List.copyOf(restaurantes);
     }
 
     public void excluirPorId(String id){
-        restaurantes.remover(restaurantes.buscar(buscarPorId(id)));
+        restaurantes.remove(buscarPorId(id));
     }
 }
