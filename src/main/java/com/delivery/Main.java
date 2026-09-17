@@ -44,7 +44,7 @@ public class Main {
         // 3. Cadastro do cliente (auto-cadastro, fora do fluxo do admin)
         Cliente cliente = new Cliente("cli-1", "Guilherme", "guilherme@email.com", "85999999999");
         clientesRepository.salvar(cliente);
-        System.out.println("Clientes cadastrados (visão do admin): " + gerenciadorClientes.getClienteRepository().listarTodos().getQuantidadeDados());
+        System.out.println("Clientes cadastrados (visão do admin): " + gerenciadorClientes.listarClientes().size());
 
         // 4. Montagem do carrinho
         Carrinho carrinho = new Carrinho();

@@ -4,12 +4,12 @@ import com.delivery.enums.StatusEntrega;
 
 public class Entrega {
     private final String id;
-    private String enderecoDestino;
+    private Endereco enderecoDestino;
     private StatusEntrega status;
     private Entregador entregador;
     private RastreamentoPedido rastreamento;
 
-    public Entrega(String id, String enderecoDestino){
+    public Entrega(String id, Endereco enderecoDestino){
         this.id = id;
         this.enderecoDestino = enderecoDestino;
         this.status = StatusEntrega.AGUARDANDO_COLETA;
